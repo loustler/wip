@@ -1,5 +1,3 @@
-import V._
-
 inThisBuild(
   Seq(
     organization := "io.loustler",
@@ -33,5 +31,8 @@ lazy val commonSetting = Seq(
 lazy val root = (project in file("."))
       .settings(commonSetting)
       .settings(
-        name:= "wip"
+        name:= "wip",
+        libraryDependencies ++= Seq(
+          "org.scalatest" %% "scalatest" % V.scalaTest % Test
+        )
       )

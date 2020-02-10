@@ -1,3 +1,3 @@
-import sbt._
-
-object V {}
+object V {
+  val scalaTest: String = "3.1.0"
+}
