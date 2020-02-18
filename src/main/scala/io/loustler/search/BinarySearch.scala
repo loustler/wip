@@ -22,11 +22,15 @@ object BinarySearch {
   def search[A](list: List[A], key: A)(implicit Ord: Ordering[A]): Option[A] = {
     import Ord._
 
+    println(s"original: $list, key: $key")
+
     def search(left: List[A], right: List[A]): Option[A] =
       if (left == right) None
       else test(left, right, middle(left, right))
 
-    def test(left: List[A], right: List[A], middle: List[A]): Option[A] =
+    def test(left: List[A], right: List[A], middle: List[A]): Option[A] = {
+      println(s"left: $left, right: $right, middle: $middle")
+
       if (key < middle.head) search(left, middle)
       else if (key > middle.head)
         search(
@@ -37,9 +41,9 @@ object BinarySearch {
         Some(
           middle.head
         )
+    }
 
     /**
-      *
       *
       * @param left  left side list
       * @param right right side list
@@ -47,13 +51,16 @@ object BinarySearch {
       */
     def middle(left: List[A], right: List[A]): List[A] = {
       @scala.annotation.tailrec
-      def race(tail: List[A], head: List[A]): List[A] =
+      def race(tail: List[A], head: List[A]): List[A] = {
+        println(s"Decide middle: head: $head, tail: $tail, right: $right")
+
         if (head != right && head.tail != right)
           race(
             tail.tail,
             head.tail.tail
           )
         else tail
+      }
 
       race(left, left.tail)
     }
